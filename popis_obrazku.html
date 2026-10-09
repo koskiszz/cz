@@ -1,0 +1,723 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Popis obrázků</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap">
+<style>
+/* Layout: шапка с флагом -> панель разделов (крупные кнопки) -> рабочая область из двух колонок, на телефоне в одну */
+:root{
+  --bg:#EDF0F5; --surface:#FFFFFF; --surface2:#F4F6FA; --ink:#101B33; --muted:#566178; --line:#D3DAE7;
+  --accent:#12408C; --on-accent:#FFFFFF; --accent-soft:#E2EAF8; --red:#C8102E; --ok:#17794A;
+  --mark:#FFF1B8; --mark-ink:#5A4300; --shadow:0 1px 2px rgba(16,27,51,.06),0 4px 14px rgba(16,27,51,.05);
+  --font:'Onest',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0C1322; --surface:#141D32; --surface2:#19243D; --ink:#E9EEF8; --muted:#98A4BE; --line:#27334F;
+  --accent:#86AEF2; --on-accent:#0C1322; --accent-soft:#1D2C4E; --red:#FF7487; --ok:#5BD08E;
+  --mark:#4A3C0E; --mark-ink:#FFE9A3; --shadow:none; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0C1322; --surface:#141D32; --surface2:#19243D; --ink:#E9EEF8; --muted:#98A4BE; --line:#27334F;
+  --accent:#86AEF2; --on-accent:#0C1322; --accent-soft:#1D2C4E; --red:#FF7487; --ok:#5BD08E;
+  --mark:#4A3C0E; --mark-ink:#FFE9A3; --shadow:none; color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--font);font-size:15px;line-height:1.5;padding-inline:16px;padding-block:20px 48px}
+.wrap{max-width:1120px;margin:0 auto;display:flex;flex-direction:column;gap:18px}
+button,select,input{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px;border-radius:6px}
+h1,h2,h3{margin:0;text-wrap:balance;line-height:1.2}
+small,.muted{color:var(--muted)}
+.mono{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+
+/* шапка */
+.hdr{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.flag{width:44px;height:30px;border-radius:4px;overflow:hidden;border:1px solid var(--line);flex:none;display:block}
+.hdr h1{font-size:30px;font-weight:700;letter-spacing:-.01em}
+.hdr p{margin:2px 0 0;color:var(--muted)}
+.hdr-txt{min-width:0}
+
+/* разделы */
+.tabs-cap{margin:0 0 8px}
+.tabs{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:8px}
+.tab{text-align:left;background:var(--surface);border:2px solid var(--line);border-radius:12px;padding:10px 12px;display:flex;flex-direction:column;gap:2px;min-width:0}
+.tab b{font-size:15px;font-weight:600}
+.tab span{font-size:12.5px;color:var(--muted)}
+.tab:hover{border-color:var(--accent)}
+.tab[aria-selected="true"]{background:var(--accent);border-color:var(--accent);color:var(--on-accent);box-shadow:var(--shadow)}
+.tab[aria-selected="true"] span{color:var(--on-accent);opacity:.85}
+.tab[aria-selected="true"] b::before{content:"▸ "}
+
+/* общие блоки */
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px;box-shadow:var(--shadow);min-width:0}
+.two{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:16px;align-items:start}
+.sticky{position:sticky;top:12px}
+@media (max-width:860px){.two{grid-template-columns:minmax(0,1fr)}.sticky{position:static}}
+.cap{margin:0 0 8px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{background:var(--surface2);border:2px solid var(--line);border-radius:999px;padding:6px 12px;font-size:14px;line-height:1.2}
+.chip:hover{border-color:var(--accent)}
+.chip[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--on-accent);font-weight:600}
+.chip[aria-pressed="true"]::before{content:"✓ "}
+.chip small{color:inherit;opacity:.7;margin-left:4px}
+.btn{background:var(--accent);color:var(--on-accent);border:2px solid var(--accent);border-radius:10px;padding:8px 14px;font-weight:600}
+.btn.ghost{background:transparent;color:var(--accent)}
+.btn:hover{filter:brightness(1.08)}
+.toolbar{display:flex;flex-wrap:wrap;gap:12px 16px;align-items:center;margin-top:12px}
+.search{flex:1 1 220px;min-width:0;border:2px solid var(--line);background:var(--surface2);border-radius:10px;padding:8px 12px}
+.search:focus{border-color:var(--accent);outline:none}
+.sw{display:flex;align-items:center;gap:8px;font-size:14px;cursor:pointer}
+.sw input{width:18px;height:18px;accent-color:var(--accent)}
+
+/* словарь */
+.groups{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr));gap:14px;margin-top:14px}
+.grp{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:12px 12px 6px;min-width:0}
+.grp h3{font-size:15px;margin-bottom:6px}
+.row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 10px;width:100%;text-align:left;background:none;border:0;border-top:1px solid var(--line);padding:8px 2px;border-radius:0;align-items:baseline}
+.row:first-of-type{border-top:0}
+.row:hover{background:var(--accent-soft)}
+.cz{font-weight:600;overflow-wrap:anywhere}
+.ru{grid-column:1;color:var(--muted);font-size:13.5px}
+.cp{grid-column:2;grid-row:1 / span 2;font-family:var(--mono);font-size:11px;color:var(--accent);align-self:center;white-space:nowrap}
+.hide-ru .row .ru{filter:blur(6px)}
+.hide-ru .row:hover .ru,.hide-ru .row:focus-visible .ru{filter:none}
+.src{font-family:var(--mono);font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin:12px 0 6px}
+
+/* схема */
+.steps{display:flex;flex-direction:column;gap:0}
+.step{background:var(--surface);border:2px solid var(--line);border-radius:14px;padding:10px;position:relative}
+.step+.step{margin-top:22px}
+.step+.step::before{content:"";position:absolute;left:30px;top:-22px;height:22px;border-left:2px solid var(--line)}
+.step.on{border-color:var(--accent);box-shadow:var(--shadow)}
+.step-main{display:flex;gap:12px;align-items:center;width:100%;text-align:left;background:none;border:0;padding:2px;min-width:0}
+.num{flex:none;width:34px;height:34px;border-radius:50%;background:var(--accent-soft);color:var(--accent);display:grid;place-items:center;font-weight:700}
+.step.on .num{background:var(--accent);color:var(--on-accent)}
+.step-main b{display:block;font-size:16px}
+.step-main small{display:block}
+.fork{margin:10px 2px 2px;padding-top:10px;border-top:1px dashed var(--line)}
+.fork-opts{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:6px}
+.opt{display:flex;gap:8px;align-items:center;background:var(--surface2);border:2px solid var(--line);border-radius:10px;padding:8px 10px;text-align:left;font-weight:500}
+.opt::before{content:"";flex:none;width:14px;height:14px;border:2px solid var(--muted);border-radius:50%}
+.opt[aria-pressed="true"]{border-color:var(--accent);background:var(--accent-soft);font-weight:700}
+.opt[aria-pressed="true"]::before{border-color:var(--accent);background:radial-gradient(var(--accent) 45%,transparent 50%)}
+.hint{background:var(--mark);color:var(--mark-ink);border-radius:10px;padding:10px 12px;margin:10px 0 0;font-size:14px}
+.pnav{display:flex;justify-content:space-between;gap:8px;margin-top:14px}
+.panel h2{font-size:20px}
+.extra{font-size:14px;color:var(--muted);margin-top:12px}
+
+/* конструктор */
+.fld{display:flex;flex-direction:column;gap:4px;min-width:0}
+.fld label{font-size:12.5px;color:var(--muted)}
+select{border:2px solid var(--line);background:var(--surface2);border-radius:8px;padding:6px 8px;min-width:0;max-width:100%;width:100%}
+select:focus{border-color:var(--accent);outline:none}
+.fgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,140px),1fr));gap:10px}
+.sec{border-top:1px solid var(--line);padding-top:14px;margin-top:14px}
+.sec:first-child{border-top:0;padding-top:0;margin-top:0}
+.sec h3{font-size:16px;margin-bottom:8px;display:flex;gap:8px;align-items:center}
+.sec h3 .num{width:26px;height:26px;font-size:13px}
+.pcard{border:2px solid var(--line);border-radius:12px;padding:10px;margin-top:10px;background:var(--surface2)}
+.phead{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:8px}
+.x{background:none;border:2px solid var(--line);border-radius:8px;padding:2px 8px;color:var(--muted)}
+.x:hover{border-color:var(--red);color:var(--red)}
+.out p{margin:0 0 10px;font-size:16.5px;line-height:1.6}
+.out .empty{color:var(--muted)}
+.note{background:var(--mark);color:var(--mark-ink);border-radius:10px;padding:8px 12px;font-size:14px;margin-bottom:12px}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.tag{display:inline-flex;gap:6px;align-items:center;background:var(--accent-soft);border-radius:999px;padding:3px 4px 3px 12px;font-size:14px}
+.tag button{background:none;border:0;color:var(--muted);padding:0 8px;font-size:16px}
+.jump{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:5;box-shadow:0 4px 14px rgba(0,0,0,.25)}
+@media (min-width:861px){.jump{display:none}}
+
+/* шаблоны */
+.tpl{white-space:pre-wrap;font-size:16px;line-height:1.7;margin:8px 0 12px}
+.tpl mark{background:var(--mark);color:var(--mark-ink);border-radius:4px;padding:0 4px}
+details summary{cursor:pointer;color:var(--accent);font-weight:600;margin:6px 0}
+.tplgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:14px}
+@media (prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+</style>
+<div class="wrap" id="app"></div>
+<script>
+const VOCAB=[
+{id:'intro',n:1,t:'Вводные фразы',groups:[
+ {id:'intro.main',t:'Как начать',items:[
+  ['Na obrázku vidím…','На картинке я вижу…'],
+  ['Na fotografii je / jsou…','На фотографии есть…'],
+  ['Obrázek zachycuje…','Картинка изображает…'],
+  ['Obrázek ukazuje…','Картинка показывает…'],
+  ['Na první pohled vidím…','На первый взгляд я вижу…']]},
+ {id:'intro.guess',t:'Когда не уверен(а)',items:[
+  ['Myslím si, že…','Я думаю, что…'],
+  ['Zdá se mi, že…','Мне кажется, что…'],
+  ['Vypadá to, že…','Похоже, что…'],
+  ['Pravděpodobně…','Вероятно…'],
+  ['Možná…','Возможно…'],
+  ['Řekl/a bych, že…','Я бы сказал(а), что…'],
+  ['Nejsem si úplně jistý/jistá, ale…','Я не совсем уверен(а), но…'],
+  ['Podle oblečení soudím, že…','Судя по одежде, я полагаю, что…'],
+  ['Je vidět, že…','Видно, что…']]},
+ {id:'intro.opinion',t:'Вывод и мнение',items:[
+  ['Podle mého názoru…','По моему мнению…'],
+  ['Celkově fotografie působí…','В целом фотография производит впечатление…'],
+  ['Celkově bych řekl/a, že…','В целом я бы сказал(а), что…'],
+  ['Líbí se mi, že…','Мне нравится, что…'],
+  ['Zaujalo mě, že…','Меня заинтересовало, что…']]}]},
+
+{id:'place',n:2,t:'Место',groups:[
+ {id:'place.out',t:'На улице',items:[
+  ['na ulici','на улице'],['v parku','в парке'],['na náměstí','на площади'],['v centru města','в центре города'],
+  ['na pláži','на пляже'],['na horách','в горах'],['v lese','в лесу'],['u moře','у моря'],['u řeky','у реки'],
+  ['na venkově','в деревне'],['na hřišti','на площадке'],['na silnici','на дороге'],['na mostě','на мосту'],['na parkovišti','на парковке']]},
+ {id:'place.other',t:'Транспорт и общественные места',items:[
+  ['na zastávce','на остановке'],['na nádraží','на вокзале'],['na letišti','в аэропорту'],['na tržišti','на рынке'],
+  ['na poště','на почте'],['v obchodním centru','в торговом центре'],['v metru','в метро'],['v autobuse','в автобусе']]},
+ {id:'place.rooms',t:'Комнаты',items:[
+  ['v obývacím pokoji','в гостиной'],['v kuchyni','на кухне'],['v ložnici','в спальне'],['v koupelně','в ванной'],
+  ['v předsíni','в прихожей'],['v dětském pokoji','в детской'],['v pokoji','в комнате']]},
+ {id:'place.build',t:'Здания и учреждения',items:[
+  ['v kanceláři','в офисе'],['ve škole','в школе'],['ve třídě','в классе'],['v obchodě','в магазине'],
+  ['v restauraci','в ресторане'],['v kavárně','в кафе'],['v nemocnici','в больнице'],['v knihovně','в библиотеке'],
+  ['v továrně','на фабрике'],['v muzeu','в музее'],['v divadle','в театре'],['v kině','в кино'],
+  ['v čekárně','в зале ожидания'],['v tělocvičně','в спортзале'],['v hotelu','в отеле'],['v bance','в банке']]},
+ {id:'place.home',t:'Жильё',items:[
+  ['v bytě','в квартире'],['v domě','в доме'],['v panelovém domě','в панельном доме'],
+  ['v rodinném domě','в частном доме'],['na zahradě','в саду']]}]},
+
+{id:'time',n:3,t:'Время и погода',groups:[
+ {id:'time.day',t:'Время суток',items:[
+  ['ráno','утром'],['dopoledne','до полудня'],['v poledne','в полдень'],['odpoledne','после полудня'],
+  ['večer','вечером'],['v noci','ночью'],['za svítání','на рассвете'],['za soumraku','в сумерках']]},
+ {id:'time.season',t:'Сезоны',items:[
+  ['na jaře','весной'],['v létě','летом'],['na podzim','осенью'],['v zimě','зимой'],
+  ['Je jaro / léto / podzim / zima.','Сейчас весна / лето / осень / зима.']]},
+ {id:'time.weather',t:'Погода',items:[
+  ['Je slunečno.','Солнечно.'],['Svítí slunce.','Светит солнце.'],['Je jasno.','Ясно.'],['Je zataženo.','Пасмурно.'],
+  ['Je oblačno.','Облачно.'],['Prší.','Идёт дождь.'],['Sněží.','Идёт снег.'],['Fouká vítr.','Дует ветер.'],
+  ['Je mlha.','Туман.'],['Je bouřka.','Гроза.'],['Je teplo / horko.','Тепло / жарко.'],
+  ['Je chladno / zima.','Прохладно / холодно.'],['Mrzne.','Мороз.'],['Je příjemné počasí.','Приятная погода.']]}]},
+
+{id:'people',n:4,t:'Люди',groups:[
+ {id:'ppl.count',t:'Количество',items:[
+  ['jeden muž / jedna žena','один мужчина / одна женщина'],['dva muži / dvě ženy','двое мужчин / две женщины'],
+  ['dvě děti','двое детей'],['tři lidé / čtyři lidé','три человека / четыре человека'],
+  ['skupina lidí','группа людей'],['rodina','семья'],['pár','пара'],['spousta lidí','много людей'],
+  ['Nejsou tam žádní lidé.','Людей там нет.']]},
+ {id:'ppl.age',t:'Возраст',items:[
+  ['dítě','ребёнок'],['chlapec / dívka','мальчик / девочка'],['teenager','подросток'],
+  ['mladý muž / mladá žena','молодой мужчина / молодая женщина'],
+  ['muž / žena středního věku','мужчина / женщина среднего возраста'],
+  ['starší muž / starší žena','пожилой мужчина / пожилая женщина'],['senior / seniorka','пожилой человек (м / ж)']]},
+ {id:'ppl.body',t:'Телосложение и рост',items:[
+  ['vysoký / vysoká','высокий / высокая'],['nízký / nízká','невысокий / невысокая'],
+  ['štíhlý / štíhlá','стройный / стройная'],['silnější postava','плотное телосложение'],
+  ['sportovní postava','спортивное телосложение'],['střední postava','среднее телосложение']]},
+ {id:'ppl.face',t:'Лицо',items:[
+  ['brýle','очки'],['vousy','борода'],['knír','усы'],['pihy','веснушки'],['vrásky','морщины'],['usmívá se','улыбается']]},
+ {id:'ppl.hair',t:'Волосы',items:[
+  ['dlouhé / krátké vlasy','длинные / короткие волосы'],['rovné vlasy','прямые волосы'],
+  ['vlnité vlasy','волнистые волосы'],['kudrnaté vlasy','кудрявые волосы'],
+  ['světlé / tmavé vlasy','светлые / тёмные волосы'],['hnědé / černé vlasy','каштановые / чёрные волосы'],
+  ['blond vlasy','светлые (блонд) волосы'],['zrzavé vlasy','рыжие волосы'],['šedivé vlasy','седые волосы'],
+  ['culík','хвост'],['cop','коса'],['plešatý','лысый'],['ofina','чёлка']]},
+ {id:'ppl.cloth',t:'Одежда',items:[
+  ['tričko, košile, svetr','футболка, рубашка, свитер'],['mikina','толстовка'],
+  ['kalhoty, džíny, sukně','брюки, джинсы, юбка'],['šaty','платье'],['kraťasy','шорты'],
+  ['bunda, kabát','куртка, пальто'],['oblek, sako','костюм, пиджак'],['boty, tenisky','обувь, кроссовки'],
+  ['čepice, klobouk','шапка, шляпа'],['šála, kravata','шарф, галстук'],['batoh, kabelka','рюкзак, сумка'],
+  ['Má na sobě…','На нём/ней надето…'],['Je oblečený/oblečená do…','Он/она одет(а) в…']]},
+ {id:'ppl.mood',t:'Настроение и эмоции',items:[
+  ['šťastný / šťastná','счастливый / счастливая'],['veselý / veselá','весёлый / весёлая'],
+  ['smutný / smutná','грустный / грустная'],['unavený / unavená','уставший / уставшая'],['nervózní','нервный'],
+  ['klidný / klidná','спокойный / спокойная'],['naštvaný / naštvaná','злой / рассерженная'],
+  ['překvapený / překvapená','удивлённый / удивлённая'],['spokojený / spokojená','довольный / довольная'],
+  ['soustředěný / soustředěná','сосредоточенный / сосредоточенная'],['zamyšlený / zamyšlená','задумчивый / задумчивая'],
+  ['znuděný / znuděná','скучающий / скучающая'],['ustaraný / ustaraná','озабоченный / озабоченная'],
+  ['Má dobrou náladu.','У него/неё хорошее настроение.'],['Vypadá, že se baví.','Похоже, ему/ей весело.']]}]}
+];
+VOCAB.push(
+{id:'actions',n:5,t:'Действия',groups:[
+ {id:'act.activity',t:'Что делают',items:[
+  ['sedí','сидит'],['stojí','стоит'],['jde / chodí','идёт / ходит'],['běží','бежит'],['jede na kole','едет на велосипеде'],
+  ['řídí auto','ведёт машину'],['jí','ест'],['pije','пьёт'],['vaří','готовит'],['uklízí','убирает'],
+  ['nakupuje','делает покупки'],['platí','платит'],['čeká','ждёт'],['pracuje','работает'],['studuje / učí se','учится'],
+  ['čte','читает'],['telefonuje','разговаривает по телефону'],['sportuje','занимается спортом'],
+  ['fotografuje','фотографирует'],['hraje si','играет'],['tančí','танцует'],['zpívá','поёт'],['plave','плавает'],
+  ['nese tašku','несёт сумку'],['drží telefon','держит телефон'],['otevírá dveře','открывает дверь']]},
+ {id:'act.interact',t:'Взаимодействие',items:[
+  ['povídají si','беседуют'],['dívají se na…','смотрят на…'],['smějí se','смеются'],['objímají se','обнимаются'],
+  ['pomáhají si','помогают друг другу'],['hrají spolu','играют вместе'],['dívají se do mobilu','смотрят в телефон'],
+  ['čekají ve frontě','стоят в очереди']]}]},
+
+{id:'layout',n:6,t:'Расположение и предметы',groups:[
+ {id:'lay.pos',t:'Расположение',items:[
+  ['vlevo / vpravo','слева / справа'],['uprostřed','посередине'],['nahoře / dole','вверху / внизу'],
+  ['v popředí / v pozadí','на переднем / заднем плане'],['vedle','рядом (с)'],['mezi','между'],['před / za','перед / за'],
+  ['nad / pod','над / под'],['naproti','напротив'],['blízko / daleko','близко / далеко'],['v rohu','в углу'],
+  ['u okna','у окна'],['na stole','на столе']]},
+ {id:'lay.objects',t:'Предметы и объекты',items:[
+  ['stůl, židle','стол, стул'],['pohovka / gauč, křeslo','диван, кресло'],['okno, dveře','окно, дверь'],
+  ['skříň, police','шкаф, полка'],['postel, koberec','кровать, ковёр'],['lampa, obraz','лампа, картина'],
+  ['televize, počítač','телевизор, компьютер'],['auto, autobus, kolo','машина, автобус, велосипед'],
+  ['strom, fontána, lavička','дерево, фонтан, скамейка'],['budova, most, cesta','здание, мост, дорога'],
+  ['semafor','светофор'],['květiny','цветы'],['kniha / knihy','книга / книги']]}]},
+
+{id:'compare',n:7,t:'Сравнение двух фото',groups:[
+ {id:'cmp.main',t:'Сравнение',items:[
+  ['Na prvním obrázku… / Na druhém obrázku…','На первой картинке… / На второй картинке…'],
+  ['Na obou obrázcích…','На обеих картинках…'],
+  ['Obě fotografie mají společné to, že…','Обе фотографии объединяет то, что…'],
+  ['Oba obrázky jsou podobné v tom, že…','Обе картинки похожи тем, что…'],
+  ['Hlavní rozdíl je v tom, že…','Главное отличие в том, что…'],
+  ['Liší se v tom, že…','Они отличаются тем, что…'],
+  ['Zatímco na prvním…, na druhém…','В то время как на первом…, на втором…'],
+  ['Na rozdíl od prvního obrázku…','В отличие от первой картинки…'],
+  ['Stejně jako na prvním obrázku…','Так же, как на первой картинке…'],
+  ['Na jedné straně…, na druhé straně…','С одной стороны…, с другой стороны…'],
+  ['Mně se víc líbí první / druhý obrázek, protože…','Мне больше нравится первая / вторая картинка, потому что…'],
+  ['Raději bych byl/a na prvním / druhém obrázku, protože…','Я бы предпочёл(а) оказаться на первой / второй картинке, потому что…']]}]},
+
+{id:'link',n:8,t:'Связующие слова',groups:[
+ {id:'link.main',t:'Связки',items:[
+  ['a','и'],['ale','но'],['nebo','или'],['protože','потому что'],['proto','поэтому'],['také','также'],
+  ['navíc','кроме того'],['kromě toho','помимо этого'],['zatímco','в то время как'],['zároveň','одновременно'],
+  ['například','например'],['naopak','наоборот'],['přesto','тем не менее'],['ačkoli','хотя'],
+  ['nejdřív / potom / nakonec','сначала / потом / наконец'],['možná / pravděpodobně','возможно / вероятно'],
+  ['celkově','в целом']]}]},
+
+{id:'impr',n:9,t:'Впечатление',groups:[
+ {id:'imp.main',t:'Атмосфера',items:[
+  ['příjemný / příjemná','приятный / приятная'],['útulný / útulná','уютный / уютная'],
+  ['klidný / klidná','спокойный / спокойная'],['rušný / rušná','оживлённый / оживлённая'],
+  ['tichý / tichá','тихий / тихая'],['čistý / špinavý','чистый / грязный'],
+  ['uklizený / neuklizený','убранный / неубранный'],['moderní / starobylý','современный / старинный'],
+  ['prostorný / malý','просторный / маленький'],['veselý / smutný','весёлый / грустный'],
+  ['chladný / teplý','холодный / тёплый']]},
+ {id:'imp.empty',t:'Если людей нет',items:[
+  ['Nejsou tam žádní lidé.','Людей там нет.'],['Je tam prázdno.','Там пусто.'],
+  ['Vypadá to, že tam nikdo není.','Похоже, там никого нет.'],['Místo působí opuštěně.','Место выглядит заброшенным.'],
+  ['Místo působí klidně.','Место выглядит спокойно.']]}]}
+);
+/* Конструктор ответа: все формы заданы явно, правил склонения "на лету" нет. */
+const G={};
+
+G.PLACES=[
+ // [id, nom, acc, loc, outdoor, ru]
+ ['ulice','ulice','ulici','na ulici',1,'улица'],
+ ['park','park','park','v parku',1,'парк'],
+ ['namesti','náměstí','náměstí','na náměstí',1,'площадь'],
+ ['centrum','centrum města','centrum města','v centru města',1,'центр города'],
+ ['plaz','pláž','pláž','na pláži',1,'пляж'],
+ ['zastavka','zastávka','zastávku','na zastávce',1,'остановка'],
+ ['nadrazi','nádraží','nádraží','na nádraží',1,'вокзал'],
+ ['letiste','letiště','letiště','na letišti',1,'аэропорт'],
+ ['hriste','hřiště','hřiště','na hřišti',1,'площадка'],
+ ['obyvak','obývací pokoj','obývací pokoj','v obývacím pokoji',0,'гостиная'],
+ ['kuchyne','kuchyň','kuchyni','v kuchyni',0,'кухня'],
+ ['loznice','ložnice','ložnici','v ložnici',0,'спальня'],
+ ['koupelna','koupelna','koupelnu','v koupelně',0,'ванная'],
+ ['kancelar','kancelář','kancelář','v kanceláři',0,'офис'],
+ ['skola','škola','školu','ve škole',0,'школа'],
+ ['trida','třída','třídu','ve třídě',0,'класс'],
+ ['obchod','obchod','obchod','v obchodě',0,'магазин'],
+ ['restaurace','restaurace','restauraci','v restauraci',0,'ресторан'],
+ ['kavarna','kavárna','kavárnu','v kavárně',0,'кафе'],
+ ['nemocnice','nemocnice','nemocnici','v nemocnici',0,'больница'],
+ ['knihovna','knihovna','knihovnu','v knihovně',0,'библиотека']
+].map(a=>({id:a[0].replace(/\s/g,''),nom:a[1],acc:a[2],loc:a[3],out:!!a[4],ru:a[5]}));
+
+G.INTROS=[
+ ['vidim','Na obrázku vidím …','acc',p=>`Na obrázku vidím ${p.acc}.`],
+ ['zachycuje','Obrázek zachycuje …','acc',p=>`Obrázek zachycuje ${p.acc}.`],
+ ['nafoto','Na fotografii je …','nom',p=>`Na fotografii je ${p.nom}.`],
+ ['poriz','Fotografie byla pořízena …','loc',p=>`Fotografie byla pořízena ${p.loc}.`]
+];
+
+G.TIMES=[['ráno','утро'],['dopoledne','до полудня'],['poledne','полдень'],['odpoledne','после полудня'],['večer','вечер'],['noc','ночь']];
+G.SEASONS=[['jaro','весна'],['léto','лето'],['podzim','осень'],['zima','зима']];
+G.WEATHER=[
+ ['svítí slunce','светит солнце'],['je jasno','ясно'],['je zataženo','пасмурно'],['je oblačno','облачно'],
+ ['prší','дождь'],['sněží','снег'],['fouká vítr','ветер'],['je mlha','туман'],['je bouřka','гроза'],
+ ['je teplo','тепло'],['je horko','жарко'],['je chladno','прохладно'],['mrzne','мороз']
+];
+G.CERT=[['','Уверенно: Je …'],['Myslím si, že ','Myslím si, že …'],['Pravděpodobně ','Pravděpodobně …']];
+
+G.KINDS={
+ muz:{g:'m',adult:1,noun:'muž',single:'Ten muž',ru:'мужчина',cnt:['jeden muž','dva muži','tři muži','čtyři muži']},
+ zena:{g:'f',adult:1,noun:'žena',single:'Ta žena',ru:'женщина',cnt:['jedna žena','dvě ženy','tři ženy','čtyři ženy']},
+ chlapec:{g:'m',adult:0,noun:'chlapec',single:'Ten chlapec',ru:'мальчик',cnt:['jeden chlapec','dva chlapci','tři chlapci','čtyři chlapci']},
+ divka:{g:'f',adult:0,noun:'dívka',single:'Ta dívka',ru:'девочка',cnt:['jedna dívka','dvě dívky','tři dívky','čtyři dívky']},
+ dite:{g:'n',adult:0,noun:'dítě',single:'To dítě',ru:'малыш',cnt:['jedno dítě','dvě děti','tři děti','čtyři děti']}
+};
+G.ORD=[{m:'První',f:'První',n:'První'},{m:'Druhý',f:'Druhá',n:'Druhé'},{m:'Třetí',f:'Třetí',n:'Třetí'},{m:'Čtvrtý',f:'Čtvrtá',n:'Čtvrté'}];
+G.POS=[['vlevo','слева'],['vpravo','справа'],['uprostřed','посередине'],['v popředí','на переднем плане'],['v pozadí','на заднем плане']];
+
+/* прилагательные -ý: m / f / n. Остальные неизменяемы. [основа m, ru] */
+G.AGE_ADULT=[['mladý','молодой'],['středního věku','среднего возраста'],['starší','пожилой']];
+G.AGE_CHILD=[['malý','маленький'],['dospívající','подросток']];
+G.HEIGHT=[['vysoký','высокий'],['nízký','невысокий'],['malého vzrůstu','небольшого роста']];
+G.BUILD=[['štíhlý','стройный',0],['sportovní postavu','спортивное телосложение',1],['silnější postavu','плотное телосложение',1]];
+G.HLEN=[['dlouhé','длинные'],['krátké','короткие'],['středně dlouhé','средней длины']];
+G.HSTYLE=[['rovné','прямые'],['vlnité','волнистые'],['kudrnaté','кудрявые']];
+G.HCOL=[['tmavé','тёмные'],['světlé','светлые'],['hnědé','каштановые'],['černé','чёрные'],['zrzavé','рыжие'],['šedivé','седые'],['blond','блонд']];
+G.HDO=[['stažené do culíku','собраны в хвост'],['spletené do copu','заплетены в косу']];
+G.FACE=[['vousy','борода',['m']],['knír','усы',['m']],['pihy','веснушки',['m','f','n']],['vrásky','морщины',['m','f','n']]];
+G.MOOD=[['šťastný','счастливый'],['veselý','весёлый'],['smutný','грустный'],['unavený','уставший'],['nervózní','нервный'],
+ ['klidný','спокойный'],['naštvaný','злой'],['překvapený','удивлённый'],['spokojený','довольный'],
+ ['soustředěný','сосредоточенный'],['zamyšlený','задумчивый'],['znuděný','скучающий'],['ustaraný','озабоченный']];
+
+/* цвета: основа; окончание по классу предмета (m: ý, f: ou, n/pl: é) */
+G.COLORS=[['bíl','бел','bílý'],['čern','чёрн','černý'],['modr','син','modrý'],['červen','красн','červený'],['zelen','зелён','zelený'],
+ ['šed','сер','šedý'],['žlut','жёлт','žlutý'],['hněd','коричнев','hnědý'],['růžov','розов','růžový'],['fialov','фиолетов','fialový'],['béžov','беж','béžový']];
+G.END={m:'ý',f:'ou',n:'é',pl:'é'};
+
+/* предметы одежды: [винительный, класс, ru] */
+G.TOP=[['tričko','n','футболка'],['košili','f','рубашка'],['svetr','m','свитер'],['mikinu','f','толстовка'],['bundu','f','куртка'],
+ ['kabát','m','пальто'],['šaty','pl','платье'],['sako','n','пиджак'],['oblek','m','костюм']];
+G.BOT=[['kalhoty','pl','брюки'],['džíny','pl','джинсы'],['sukni','f','юбка'],['kraťasy','pl','шорты']];
+G.HEAD=[['čepici','f','шапка'],['klobouk','m','шляпа'],['šátek','m','платок']];
+G.NECK=[['šálu','f','шарф'],['kravatu','f','галстук']];
+G.FEET=[['boty','pl','обувь'],['tenisky','pl','кроссовки'],['sandály','pl','сандалии']];
+G.BAG=[['kabelku','f','сумка'],['batoh','m','рюкзак'],['tašku','f','сумка (пакет)']];
+G.GLASS=[['brýle','очки'],['sluneční brýle','солнечные очки']];
+
+G.ACT=[
+ ['sedí na lavičce','сидит на скамейке'],['sedí u stolu','сидит за столом'],['stojí u okna','стоит у окна'],
+ ['stojí a čeká','стоит и ждёт'],['jde po ulici','идёт по улице'],['běží','бежит'],['jede na kole','едет на велосипеде'],
+ ['čte knihu','читает книгу'],['telefonuje','разговаривает по телефону'],['pije kávu','пьёт кофе'],['jí','ест'],
+ ['vaří','готовит'],['nakupuje','делает покупки'],['pracuje u počítače','работает за компьютером'],
+ ['učí se','учится','se učí'],['hraje si','играет','si hraje'],['fotografuje','фотографирует'],['usmívá se','улыбается','se usmívá'],
+ ['povídá si s kamarády','беседует с друзьями','si povídá s kamarády'],['čeká na autobus','ждёт автобус']
+];
+
+G.OBJ=[
+ ['stůl',0,'стол'],['židle',0,'стул'],['křeslo',0,'кресло'],['pohovka',0,'диван'],['okno',0,'окно'],['dveře',1,'дверь'],
+ ['skříň',0,'шкаф'],['police',0,'полка'],['postel',0,'кровать'],['koberec',0,'ковёр'],['lampa',0,'лампа'],['obraz',0,'картина'],
+ ['televize',0,'телевизор'],['počítač',0,'компьютер'],['auto',0,'машина'],['autobus',0,'автобус'],['kolo',0,'велосипед'],
+ ['strom',0,'дерево'],['stromy',1,'деревья'],['fontána',0,'фонтан'],['lavička',0,'скамейка'],['lavičky',1,'скамейки'],
+ ['budova',0,'здание'],['domy',1,'дома'],['most',0,'мост'],['cesta',0,'дорога'],['semafor',0,'светофор'],['květiny',1,'цветы'],['knihy',1,'книги']
+].map(a=>({cz:a[0],pl:!!a[1],ru:a[2]}));
+G.OPOS=[['V popředí','на переднем плане'],['V pozadí','на заднем плане'],['Vlevo','слева'],['Vpravo','справа'],['Uprostřed','посередине'],['Nahoře','вверху'],['Dole','внизу']];
+G.IMPR=[['příjemně','приятно'],['klidně','спокойно'],['útulně','уютно'],['moderně','современно'],['vesele','весело'],['rušně','оживлённо'],['smutně','грустно'],['chladně','холодно']];
+
+/* ---------- хелперы ---------- */
+G.cap=s=>s?s[0].toUpperCase()+s.slice(1):s;
+G.join=l=>l.length<2?(l[0]||''):l.slice(0,-1).join(', ')+' a '+l[l.length-1];
+G.adj=(b,g)=>{ if(!b.endsWith('ý')) return b; const s=b.slice(0,-1); return g==='m'?b:g==='f'?s+'á':s+'é'; };
+G.col=(ci,cls)=>{ const c=G.COLORS[ci]; return c[0]+G.END[cls]; };
+G.np=(list,i,ci)=>{ if(i===''||i==null) return ''; const it=list[+i]; return (ci===''||ci==null)? it[0] : G.col(+ci,it[1])+' '+it[0]; };
+
+G.emptyPerson=kind=>({kind,pos:'',age:'',height:'',build:'',hlen:'',hstyle:'',hcol:'',hdo:'',face:'',top:'',topc:'',bot:'',botc:'',head:'',headc:'',neck:'',neckc:'',feet:'',feetc:'',bag:'',bagc:'',glass:'',mood:'',act:''});
+
+G.subject=(persons,idx)=>{
+ const p=persons[idx], k=G.KINDS[p.kind];
+ const same=persons.filter(x=>x.kind===p.kind);
+ if(same.length===1) return k.single;
+ const n=persons.slice(0,idx).filter(x=>x.kind===p.kind).length;
+ return G.ORD[n][k.g]+' '+k.noun;
+};
+
+G.person=(persons,idx)=>{
+ const p=persons[idx], k=G.KINDS[p.kind], g=k.g, pr=[];
+ if(p.pos!=='') pr.push('je '+G.POS[+p.pos][0]);
+ const be=[];
+ if(p.age!==''){ const L=k.adult?G.AGE_ADULT:G.AGE_CHILD; be.push(G.adj(L[+p.age][0],g)); }
+ if(p.height!=='') be.push(G.adj(G.HEIGHT[+p.height][0],g));
+ if(p.build!==''&&!G.BUILD[+p.build][2]) be.push(G.adj(G.BUILD[+p.build][0],g));
+ if(be.length) pr.push('je '+G.join(be));
+ const have=[];
+ if(p.build!==''&&G.BUILD[+p.build][2]) have.push(G.BUILD[+p.build][0]);
+ const hp=[p.hlen!==''?G.HLEN[+p.hlen][0]:'',p.hstyle!==''?G.HSTYLE[+p.hstyle][0]:'',p.hcol!==''?G.HCOL[+p.hcol][0]:''].filter(Boolean);
+ if(hp.length||p.hdo!=='') have.push((hp.concat('vlasy')).join(' ')+(p.hdo!==''?' '+G.HDO[+p.hdo][0]:''));
+ if(p.face!=='') have.push(G.FACE[+p.face][0]);
+ if(have.length) pr.push('má '+G.join(have));
+ const cl=[G.np(G.TOP,p.top,p.topc),G.np(G.BOT,p.bot,p.botc)].filter(Boolean);
+ if(cl.length) pr.push('má na sobě '+G.join(cl));
+ const hd=G.np(G.HEAD,p.head,p.headc); if(hd) pr.push('má na hlavě '+hd);
+ const nk=G.np(G.NECK,p.neck,p.neckc); if(nk) pr.push('má na krku '+nk);
+ const ft=G.np(G.FEET,p.feet,p.feetc); if(ft) pr.push('má na nohou '+ft);
+ if(p.glass!=='') pr.push('nosí '+G.GLASS[+p.glass][0]);
+ const bg=G.np(G.BAG,p.bag,p.bagc); if(bg) pr.push('nese '+bg);
+ if(p.mood!=='') pr.push('je '+G.adj(G.MOOD[+p.mood][0],g));
+ let actAlt=null; if(p.act!==''){ pr.push(G.ACT[+p.act][0]); actAlt=G.ACT[+p.act][2]||null; }
+ if(!pr.length) return '';
+ const sub=G.subject(persons,idx);
+ if(actAlt && pr.length===1) pr[0]=actAlt;
+ return [sub+' '+pr[0]+'.'].concat(pr.slice(1).map(x=>G.cap(x)+'.')).join(' ');
+};
+
+/* s = {place, intro, noPeople, time, season, weather[], cert, persons[], objs[{o,pos}], impr} */
+G.build=s=>{
+ const out=[];
+ const pl=G.PLACES.find(x=>x.id===s.place);
+ const l1=[];
+ if(pl){ const it=G.INTROS.find(x=>x[0]===s.intro)||G.INTROS[0]; l1.push(it[3](pl)); }
+ const cl=[];
+ if(s.time!=='') cl.push('je '+G.TIMES[+s.time][0]);
+ if(pl&&pl.out){
+  if(s.season!=='') cl.push('je '+G.SEASONS[+s.season][0]);
+  (s.weather||[]).forEach(i=>cl.push(G.WEATHER[+i][0]));
+ }
+ if(cl.length){
+  const c=G.CERT[+s.cert||0][0], j=G.join(cl);
+  l1.push(c? c+j+'.' : G.cap(j)+'.');
+ }
+ if(l1.length) out.push(l1.join(' '));
+ const pe=[];
+ if(s.noPeople){ pe.push('Na obrázku nejsou žádní lidé.'); }
+ else if(s.persons.length){
+  const parts=[]; Object.keys(G.KINDS).forEach(k=>{ const n=s.persons.filter(p=>p.kind===k).length; if(n) parts.push(G.KINDS[k].cnt[n-1]); });
+  pe.push('Na obrázku '+(s.persons.length===1?'je':'jsou')+' '+G.join(parts)+'.');
+  s.persons.forEach((_,i)=>{ const t=G.person(s.persons,i); if(t) pe.push(t); });
+ }
+ if(pe.length) out.push(pe.join(' '));
+ const ob=[];
+ G.OPOS.forEach((P,pi)=>{
+  const items=(s.objs||[]).filter(x=>+x.pos===pi).map(x=>G.OBJ[+x.o]);
+  if(items.length) ob.push(P[0]+' '+(items[0].pl?'jsou':'je')+' '+G.join(items.map(x=>x.cz))+'.');
+ });
+ if(ob.length) out.push(ob.join(' '));
+ if(s.impr!=='') out.push('Celkově fotografie působí '+G.IMPR[+s.impr][0]+'.');
+ return out;
+};
+
+if(typeof module!=='undefined') module.exports=G;
+const $=(s,r=document)=>r.querySelector(s);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const S={tab:'flow',block:'intro',q:'',hideRu:false,flow:{sel:0,place:'out',people:'yes'}};
+const TABS=[['flow','Схема','шаги и ветвления'],['vocab','Словарь','слова и фразы по темам'],['build','Конструктор','выбери — получи текст'],['tpl','Шаблоны','готовые ответы и сравнение']];
+const app=document.getElementById('app');
+
+async function copyText(t,el){
+  let ok=false;
+  try{await navigator.clipboard.writeText(t);ok=true}catch(e){
+    try{const ta=document.createElement('textarea');ta.value=t;ta.style.cssText='position:fixed;opacity:0';document.body.appendChild(ta);ta.select();ok=document.execCommand('copy');ta.remove()}catch(e2){}
+  }
+  const cp=el&&(el.classList.contains('cp')?el:el.querySelector('.cp'));
+  const target=cp||el; if(!target) return;
+  const old=target.dataset.old||target.textContent; target.dataset.old=old;
+  target.textContent=ok?'✓ скопировано':'выдели и скопируй';
+  clearTimeout(target._t); target._t=setTimeout(()=>{target.textContent=old},1300);
+}
+
+function findGroup(id){for(const b of VOCAB){const g=b.groups.find(x=>x.id===id);if(g)return g}return null}
+const rowHTML=it=>`<button class="row" data-copy="${esc(it[0])}"><span class="cz">${esc(it[0])}</span><span class="ru">${esc(it[1])}</span><span class="cp">копировать</span></button>`;
+const groupHTML=(g,items)=>`<section class="grp"><h3>${esc(g.t)}</h3>${(items||g.items).map(rowHTML).join('')}</section>`;
+const hideSw=()=>`<label class="sw"><input type="checkbox" id="hru" ${S.hideRu?'checked':''}> Скрывать перевод (проверь себя: наведи или нажми на строку)</label>`;
+
+/* ---------- словарь ---------- */
+function viewVocab(){
+  return `<div class="card"><p class="mono cap">Раздел словаря: нажми, чтобы переключить</p>
+  <div class="chips">${VOCAB.map(b=>{const n=b.groups.reduce((a,g)=>a+g.items.length,0);return `<button class="chip" data-block="${b.id}" aria-pressed="${S.block===b.id&&!S.q.trim()}">${b.n}. ${esc(b.t)}<small>${n}</small></button>`}).join('')}</div>
+  <div class="toolbar"><input class="search" id="q" type="search" placeholder="Поиск по всем разделам: чешское или русское слово" value="${esc(S.q)}" aria-label="Поиск по словарю">${hideSw()}</div>
+  <p class="muted" style="margin:10px 0 0;font-size:13.5px">Нажми на любую строку, и фраза скопируется.</p></div>
+  <div id="vres"></div>`;
+}
+function vres(){
+  const el=$('#vres'); if(!el) return;
+  const q=S.q.trim().toLowerCase();
+  if(!q){const b=VOCAB.find(x=>x.id===S.block);el.innerHTML=`<div class="groups">${b.groups.map(g=>groupHTML(g)).join('')}</div>`;return}
+  let n=0,html='';
+  VOCAB.forEach(b=>b.groups.forEach(g=>{const it=g.items.filter(x=>x[0].toLowerCase().includes(q)||x[1].toLowerCase().includes(q));if(it.length){n+=it.length;html+=groupHTML({t:b.t+' · '+g.t},it)}}));
+  el.innerHTML=n?`<p class="src">Найдено: ${n}</p><div class="groups">${html}</div>`:`<p class="muted" style="margin-top:14px">Ничего не найдено. Попробуй другое слово.</p>`;
+}
+
+/* ---------- схема ---------- */
+function flowSteps(){
+  const f=S.flow,out=f.place==='out',yes=f.people==='yes';
+  return [
+   {t:'Что изображено?',q:'Общая тема картинки',hint:'Одним предложением назови, что это за ситуация или место. Если не уверен(а), начни с Myslím si, že…',groups:['intro.main','intro.guess']},
+   {t:'Где происходит действие?',q:'Улица или помещение',fork:{key:'place',opts:[['out','На улице'],['in','В помещении']]},
+    hint:out?'Назови место: на улице, в парке, на площади. Потом переходи к времени и погоде.':'Назови помещение или здание: на кухне, в офисе, в школе. Потом опиши, что там есть.',
+    groups:out?['place.out','place.other']:['place.rooms','place.build','place.home']},
+   out?{t:'Время и погода',q:'Время суток, сезон, погода',hint:'Скажи, какое время суток и сезон и какая погода. Если не уверен(а), используй Myslím si, že… или Pravděpodobně…',groups:['time.day','time.season','time.weather']}
+      :{t:'Что в помещении?',q:'Предметы и где они стоят',hint:'Назови главные предметы и скажи, где они: слева, справа, на переднем плане. Время суток можно определить по свету из окна.',groups:['lay.objects','lay.pos','time.day']},
+   {t:'Есть ли люди?',q:'Выбери ветку',fork:{key:'people',opts:[['yes','Да, люди есть'],['no','Нет, людей нет']]},
+    hint:yes?'Дальше опиши людей: сколько их, как выглядят, что делают.':'Скажи, что людей нет, и опиши предметы, расположение и атмосферу.',groups:['ppl.count']},
+   yes?{t:'Как выглядят люди?',q:'Возраст, телосложение, волосы, одежда',hint:'По порядку: сколько людей → возраст → телосложение → волосы → одежда. Каждого описывай коротко.',groups:['ppl.age','ppl.body','ppl.face','ppl.hair','ppl.cloth']}
+      :{t:'Предметы и расположение',q:'Что где находится',hint:'Используй слова расположения: vlevo, vpravo, v popředí, v pozadí.',groups:['lay.pos','lay.objects']},
+   yes?{t:'Что делают и что чувствуют?',q:'Действия, взаимодействие, настроение',hint:'Скажи, что делает каждый человек и какое у него настроение. Если людей несколько, опиши, как они взаимодействуют.',groups:['act.activity','act.interact','ppl.mood']}
+      :{t:'Атмосфера',q:'Какое впечатление производит место',hint:'Тихо, пусто, уютно, чисто? Скажи, какая здесь атмосфера.',groups:['imp.empty','imp.main']},
+   {t:'Какое впечатление?',q:'Общий вывод и своё мнение',hint:'Закончи общим впечатлением и своим мнением.',groups:['intro.opinion','imp.main','link.main']}
+  ];
+}
+const forkHTML=(k,f)=>`<div class="fork"><div class="mono">Выбери ветку, чтобы схема изменилась</div><div class="fork-opts">${f.opts.map(o=>`<button class="opt" data-fork="${f.key}:${o[0]}" aria-pressed="${S.flow[f.key]===o[0]}">${o[1]}</button>`).join('')}</div></div>`;
+function panelHTML(st){
+  const i=S.flow.sel,s=st[i];
+  return `<p class="mono cap">Шаг ${i+1} из ${st.length}</p><h2>${esc(s.t)}</h2>
+  <div class="hint"><b>Что сказать:</b> ${esc(s.hint)}</div>
+  <div class="toolbar">${hideSw()}</div>
+  <div class="groups">${s.groups.map(id=>findGroup(id)).filter(Boolean).map(g=>groupHTML(g)).join('')}</div>
+  <div class="pnav"><button class="btn ghost" data-step="${i-1}" ${i===0?'disabled style="opacity:.4"':''}>← Назад</button><button class="btn" data-step="${i+1}" ${i===st.length-1?'disabled style="opacity:.4"':''}>Дальше →</button></div>`;
+}
+function viewFlow(){
+  const st=flowSteps(); S.flow.sel=Math.min(S.flow.sel,st.length-1);
+  const list=st.map((s,i)=>`<div class="step ${i===S.flow.sel?'on':''}"><button class="step-main" data-step="${i}"><span class="num">${i+1}</span><span><b>${esc(s.t)}</b><small>${esc(s.q)}</small></span></button>${s.fork?forkHTML(i,s.fork):''}</div>`).join('');
+  return `<div class="two"><div><p class="mono cap">Схема описания: нажми на шаг, справа появятся фразы</p><div class="steps">${list}</div></div><div class="card panel sticky" id="fpanel">${panelHTML(st)}</div></div>`;
+}
+
+/* ---------- каркас ---------- */
+function header(){return `<header class="hdr"><svg class="flag" viewBox="0 0 3 2" aria-hidden="true"><rect width="3" height="1" fill="#fff"/><rect y="1" width="3" height="1" fill="#D7141A"/><path d="M0 0L1.5 1L0 2z" fill="#11457E"/></svg><div class="hdr-txt"><h1>Popis obrázků</h1><p>CCE B1 · устная часть · описание картинки</p></div></header>`}
+function tabsHTML(){return `<nav aria-label="Разделы страницы"><p class="mono tabs-cap">Разделы страницы. Выбранный раздел залит цветом</p><div class="tabs" role="tablist">${TABS.map(t=>`<button class="tab" role="tab" data-tab="${t[0]}" aria-selected="${S.tab===t[0]}"><b>${t[1]}</b><span>${t[2]}</span></button>`).join('')}</div></nav>`}
+function renderView(){
+  const v=$('#view'); if(!v) return;
+  const fn={flow:viewFlow,vocab:viewVocab,build:window.viewBuild,tpl:window.viewTpl}[S.tab];
+  v.innerHTML=fn();
+  v.classList.toggle('hide-ru',S.hideRu);
+  if(S.tab==='vocab') vres();
+  if(S.tab==='build'&&window.ctorAfter) window.ctorAfter();
+}
+function renderAll(){app.innerHTML=header()+tabsHTML()+'<main id="view"></main>';renderView()}
+function setTab(t){S.tab=t;try{history.replaceState(null,'','#'+t)}catch(e){};$('nav[aria-label]').outerHTML=tabsHTML();renderView();window.scrollTo({top:0})}
+
+document.addEventListener('click',e=>{
+  const t=e.target.closest('[data-tab],[data-block],[data-step],[data-fork],[data-copy],[data-act]'); if(!t) return;
+  const d=t.dataset;
+  if(d.tab){setTab(d.tab);return}
+  if(d.block){S.block=d.block;S.q='';renderView();return}
+  if(d.fork){const [k,v]=d.fork.split(':');S.flow[k]=v;const st=t.closest('.step');S.flow.sel=[...st.parentNode.children].indexOf(st);renderView();return}
+  if(d.step!==undefined){S.flow.sel=+d.step;renderView();if(innerWidth<=860){$('#fpanel').scrollIntoView({behavior:'smooth',block:'start'})}return}
+  if(d.copy!==undefined){copyText(d.copy,t);return}
+  if(d.act&&window.ctorAct){window.ctorAct(d.act,t)}
+});
+document.addEventListener('input',e=>{
+  if(e.target.id==='q'){S.q=e.target.value;$$chips();vres()}
+});
+document.addEventListener('change',e=>{
+  if(e.target.id==='hru'){S.hideRu=e.target.checked;$('#view').classList.toggle('hide-ru',S.hideRu)}
+  else if(window.ctorChange) window.ctorChange(e.target);
+});
+function $$chips(){document.querySelectorAll('[data-block]').forEach(b=>b.setAttribute('aria-pressed',String(S.block===b.dataset.block&&!S.q.trim())))}
+/* ---------- конструктор ---------- */
+const RUCOL=['белый','чёрный','синий','красный','зелёный','серый','жёлтый','коричневый','розовый','фиолетовый','бежевый'];
+const PLUS={muz:'+ muž (мужчина)',zena:'+ žena (женщина)',chlapec:'+ chlapec (мальчик)',divka:'+ dívka (девочка)',dite:'+ dítě (малыш)'};
+function exampleState(){
+  const p=Object.assign(G.emptyPerson('zena'),{age:'0',build:'0',hlen:'0',hcol:'0',top:'4',topc:'10',bot:'1',botc:'2',mood:'10',act:'19'});
+  return {example:true,place:'ulice',intro:'vidim',noPeople:false,time:'3',season:'2',weather:['2'],cert:'1',persons:[p],objs:[{o:'18',pos:'1'},{o:'20',pos:'2'}],impr:'1',objSel:'0',objPos:'0'};
+}
+function blankState(){return {example:false,place:'',intro:'vidim',noPeople:false,time:'',season:'',weather:[],cert:'0',persons:[],objs:[],impr:'',objSel:'0',objPos:'0'}}
+let C=exampleState();
+const isOut=()=>{const p=G.PLACES.find(x=>x.id===C.place);return !p||p.out};
+
+const chip=(act,label,on,extra='')=>`<button class="chip" data-act="${act}" aria-pressed="${on}">${label}${extra}</button>`;
+const optsHTML=(list,val,lab)=>`<option value="">— не указывать —</option>`+list.map((x,i)=>`<option value="${i}" ${String(val)===String(i)?'selected':''}>${esc(lab(x))}</option>`).join('');
+const fld=(label,p,pi,f,list,lab,only)=>{
+  let items=list.map((x,i)=>[x,i]);
+  if(only) items=items.filter(([x])=>only(x));
+  return `<div class="fld"><label for="p${pi}_${f}">${label}</label><select id="p${pi}_${f}" data-p="${pi}" data-f="${f}"><option value="">— не указывать —</option>${items.map(([x,i])=>`<option value="${i}" ${p[f]===String(i)?'selected':''}>${esc(lab(x))}</option>`).join('')}</select></div>`;
+};
+const L2=x=>x[0]+' — '+x[1], L3=x=>x[0]+' — '+x[2], LC=x=>x[2]+' — '+RUCOL[G.COLORS.indexOf(x)];
+
+function personCard(p,pi){
+  const k=G.KINDS[p.kind], sub=G.subject(C.persons,pi);
+  const age=k.adult?G.AGE_ADULT:G.AGE_CHILD;
+  const cl=(lab,f,list)=>fld(lab,p,pi,f,list,L3)+fld('Цвет',p,pi,f+'c',G.COLORS,LC);
+  return `<div class="pcard"><div class="phead"><b>${esc(sub)} <small>(${k.ru})</small></b><button class="x" data-act="rmp:${pi}" aria-label="Удалить человека">Удалить ✕</button></div>
+  <div class="fgrid">
+   ${fld('Где стоит',p,pi,'pos',G.POS,L2)}${fld('Возраст',p,pi,'age',age,L2)}${fld('Рост',p,pi,'height',G.HEIGHT,L2)}${fld('Телосложение',p,pi,'build',G.BUILD,L2)}
+   ${fld('Длина волос',p,pi,'hlen',G.HLEN,L2)}${fld('Волосы',p,pi,'hstyle',G.HSTYLE,L2)}${fld('Цвет волос',p,pi,'hcol',G.HCOL,L2)}${fld('Причёска',p,pi,'hdo',G.HDO,L2)}
+   ${fld('Лицо',p,pi,'face',G.FACE,L2,x=>x[2].includes(k.g))}${fld('Очки',p,pi,'glass',G.GLASS,L2)}
+   ${cl('Верх','top',G.TOP)}${cl('Низ','bot',G.BOT)}${cl('На голове','head',G.HEAD)}${cl('На шее','neck',G.NECK)}${cl('Обувь','feet',G.FEET)}${cl('Сумка','bag',G.BAG)}
+   ${fld('Настроение',p,pi,'mood',G.MOOD,L2)}${fld('Что делает',p,pi,'act',G.ACT,L2)}
+  </div></div>`;
+}
+
+function viewBuild(){
+  const out=isOut(), places=G.PLACES;
+  const pl=(o)=>places.filter(p=>p.out===o).map(p=>chip('place:'+p.id,G.cap(p.nom),C.place===p.id,`<small>${p.ru}</small>`)).join('');
+  const sec=(n,t,body)=>`<section class="sec"><h3><span class="num">${n}</span>${t}</h3>${body}</section>`;
+  const objTags=C.objs.map((x,i)=>`<span class="tag">${G.OPOS[+x.pos][0]}: ${G.OBJ[+x.o].cz}<button data-act="rmo:${i}" aria-label="Убрать предмет">✕</button></span>`).join('');
+  const left=`<div class="card">
+  ${C.example?`<div class="note">Это пример. Измени выбор под свою картинку или <button class="btn ghost" style="padding:2px 10px" data-act="clear">очисти всё</button></div>`:`<div class="toolbar" style="margin:0 0 12px"><button class="btn ghost" data-act="clear">Очистить всё</button></div>`}
+  ${sec(1,'Место',`<p class="mono cap">Выбери одно. Нажми ещё раз, чтобы снять выбор</p><p class="muted" style="margin:0 0 6px;font-size:13.5px">На улице</p><div class="chips">${pl(true)}</div><p class="muted" style="margin:12px 0 6px;font-size:13.5px">В помещении</p><div class="chips">${pl(false)}</div>
+   <div class="fld" style="margin-top:12px;max-width:340px"><label for="intro">Как начать предложение</label><select id="intro" data-f="intro">${G.INTROS.map(x=>`<option value="${x[0]}" ${C.intro===x[0]?'selected':''}>${x[1]}</option>`).join('')}</select></div>`)}
+  ${sec(2,out?'Время, сезон, погода':'Время суток',`<p class="mono cap">Время суток</p><div class="chips">${G.TIMES.map((t,i)=>chip('time:'+i,t[0],C.time===String(i),`<small>${t[1]}</small>`)).join('')}</div>
+   ${out?`<p class="mono cap" style="margin-top:12px">Сезон</p><div class="chips">${G.SEASONS.map((t,i)=>chip('season:'+i,t[0],C.season===String(i),`<small>${t[1]}</small>`)).join('')}</div>
+   <p class="mono cap" style="margin-top:12px">Погода (можно несколько)</p><div class="chips">${G.WEATHER.map((t,i)=>chip('weather:'+i,t[0],C.weather.includes(String(i)),`<small>${t[1]}</small>`)).join('')}</div>`:`<p class="muted" style="font-size:13.5px;margin:10px 0 0">Сезон и погоду в помещении обычно не описывают.</p>`}
+   <div class="fld" style="margin-top:12px;max-width:340px"><label for="cert">Насколько ты уверен(а)</label><select id="cert" data-f="cert">${G.CERT.map((x,i)=>`<option value="${i}" ${C.cert===String(i)?'selected':''}>${x[1]}</option>`).join('')}</select></div>`)}
+  ${sec(3,'Люди',`<div class="chips"><button class="chip" data-act="ppl:yes" aria-pressed="${!C.noPeople}">Люди есть</button><button class="chip" data-act="ppl:no" aria-pressed="${C.noPeople}">Людей нет</button></div>
+   ${C.noPeople?'':`<p class="mono cap" style="margin-top:12px">Добавь каждого человека, потом опиши его</p><div class="chips">${Object.keys(G.KINDS).map(k=>`<button class="chip" data-act="addp:${k}" ${C.persons.length>=4?'disabled style="opacity:.45"':''}>${PLUS[k]}</button>`).join('')}</div>${C.persons.map(personCard).join('')}`}`)}
+  ${sec(4,'Предметы и расположение',`<div class="fgrid"><div class="fld"><label for="objSel">Предмет</label><select id="objSel" data-f="objSel">${G.OBJ.map((o,i)=>`<option value="${i}" ${C.objSel===String(i)?'selected':''}>${o.cz} — ${o.ru}</option>`).join('')}</select></div>
+   <div class="fld"><label for="objPos">Где находится</label><select id="objPos" data-f="objPos">${G.OPOS.map((o,i)=>`<option value="${i}" ${C.objPos===String(i)?'selected':''}>${o[0].toLowerCase()} — ${o[1]}</option>`).join('')}</select></div></div>
+   <div class="toolbar" style="margin-top:10px"><button class="btn" data-act="addo">+ Добавить предмет</button></div><div class="tags">${objTags}</div>`)}
+  ${sec(5,'Впечатление',`<div class="fld" style="max-width:340px"><label for="impr">Celkově fotografie působí …</label><select id="impr" data-f="impr">${optsHTML(G.IMPR,C.impr,L2)}</select></div>`)}
+  </div>`;
+  const right=`<div class="card out sticky" id="outcard"><p class="mono cap">Готовый текст на чешском</p><div id="outtext"></div><div class="toolbar"><button class="btn" id="copyOut" data-act="copyout">Копировать текст</button></div>
+   <p class="extra">Все формы слов заранее проверены: род, падеж и число подставляются автоматически. Текст всё равно перечитай и подправь под свою картинку.</p></div>`;
+  return `<div class="two">${left}${right}</div><button class="btn jump" data-act="jump">Текст ↓</button>`;
+}
+function stateForGen(){return {place:C.place,intro:C.intro,noPeople:C.noPeople,time:C.time,season:C.season,weather:C.weather,cert:C.cert,persons:C.noPeople?[]:C.persons,objs:C.objs,impr:C.impr}}
+function curText(){return G.build(stateForGen())}
+function updateOut(){
+  const el=$('#outtext'); if(!el) return;
+  const t=curText();
+  el.innerHTML=t.length?t.map(x=>`<p>${esc(x)}</p>`).join(''):`<p class="empty">Выбери что-нибудь слева, и здесь появится текст.</p>`;
+}
+window.ctorAfter=updateOut;
+function ctorRerender(){const y=window.scrollY;renderView();window.scrollTo({top:y})}
+window.ctorAct=(a,el)=>{
+  const [k,v]=a.split(':');
+  if(k==='copyout'){copyText(curText().join('\n\n'),el);return}
+  if(k==='jump'){$('#outcard').scrollIntoView({behavior:'smooth',block:'start'});return}
+  C.example=false;
+  const tog=(f)=>{C[f]=C[f]===v?'':v};
+  if(k==='place'){tog('place')}
+  else if(k==='time'){tog('time')}
+  else if(k==='season'){tog('season')}
+  else if(k==='weather'){C.weather=C.weather.includes(v)?C.weather.filter(x=>x!==v):C.weather.concat(v)}
+  else if(k==='ppl'){C.noPeople=v==='no'}
+  else if(k==='addp'){if(C.persons.length<4)C.persons.push(G.emptyPerson(v))}
+  else if(k==='rmp'){C.persons.splice(+v,1)}
+  else if(k==='addo'){C.objs.push({o:C.objSel,pos:C.objPos})}
+  else if(k==='rmo'){C.objs.splice(+v,1)}
+  else if(k==='clear'){C=blankState()}
+  ctorRerender();
+};
+window.ctorChange=el=>{
+  if(!el.dataset.f) return;
+  const hadNote=C.example; C.example=false;
+  if(el.dataset.p!==undefined) C.persons[+el.dataset.p][el.dataset.f]=el.value; else C[el.dataset.f]=el.value;
+  if(hadNote){const n=document.querySelector('.note');if(n)n.remove()}
+  updateOut();
+};
+window.viewBuild=viewBuild;
+
+/* ---------- шаблоны ---------- */
+const TPLS=[
+ {t:'Описание с людьми',txt:`Na obrázku vidím [[místo]]. Myslím si, že je [[roční období]] a [[denní doba]], protože [[důvod, např. je zataženo]].
+Na obrázku je/jsou [[počet lidí]]. [[Osoba]] je [[věk]] a [[postava]]. Má [[vlasy]] a má na sobě [[oblečení]]. Je [[nálada]] a [[činnost]].
+V popředí je/jsou [[předměty]], v pozadí je/jsou [[předměty]]. Vlevo je [[co]], vpravo je [[co]].
+Celkově fotografie působí [[dojem]]. Podle mého názoru [[vlastní názor]].`},
+ {t:'Описание без людей',txt:`Na obrázku vidím [[místo]]. Nejsou tam žádní lidé.
+Myslím si, že je [[denní doba]] a [[počasí, např. je zataženo]].
+V popředí je/jsou [[předměty]]. V pozadí vidím [[předměty]]. Vlevo je [[co]], vpravo je [[co]].
+Místo působí [[dojem: klidně / opuštěně / útulně]], protože [[důvod]].`},
+ {t:'Сравнение двух фотографий',txt:`Na prvním obrázku je/jsou [[co]]. Na druhém obrázku je/jsou [[co]].
+Obě fotografie mají společné to, že [[podobnost]].
+Hlavní rozdíl je v tom, že [[rozdíl]]. Zatímco na prvním obrázku [[co]], na druhém [[co]].
+Podle mého názoru [[co se mi líbí víc]], protože [[důvod]].`}
+];
+const SAMPLES=[
+ {t:'Образец ответа: улица, есть человек',cz:'Na obrázku vidím ulici ve městě. Myslím si, že je podzim, protože je zataženo a chladno. Podle světla je asi odpoledne. V popředí je mladá žena, která čeká na zastávce. Má dlouhé tmavé vlasy a na sobě má béžovou bundu a modré džíny. Vypadá trochu unaveně. V pozadí jsou stromy a budovy. Vlevo je lavička. Celkově fotografie působí klidně, ale trochu smutně.',
+  ru:'На картинке я вижу улицу в городе. Я думаю, что сейчас осень, потому что пасмурно и холодно. По свету, наверное, послеполуденное время. На переднем плане молодая женщина, которая ждёт на остановке. У неё длинные тёмные волосы, на ней бежевая куртка и синие джинсы. Она выглядит немного уставшей. На заднем плане деревья и здания. Слева скамейка. В целом фотография производит спокойное, но немного грустное впечатление.'},
+ {t:'Образец ответа: помещение, людей нет',cz:'Na obrázku vidím kuchyni. Nejsou tam žádní lidé. Myslím si, že je ráno, protože do okna svítí slunce. Uprostřed je velký stůl a kolem stolu jsou židle. Vlevo je skříň a vpravo je okno. Celkově místo působí čistě a útulně.',
+  ru:'На картинке я вижу кухню. Людей там нет. Я думаю, что сейчас утро, потому что в окно светит солнце. Посередине большой стол, а вокруг стола стулья. Слева шкаф, а справа окно. В целом место выглядит чисто и уютно.'}
+];
+const HELP=[['Nevím, jak se to řekne, ale…','Не знаю, как это сказать, но…'],['Je to něco jako…','Это что-то вроде…'],['Je to věc, která slouží k…','Это вещь, которая служит для…'],['Je to podobné jako…','Это похоже на…'],['Myslím, že to je…','Думаю, что это…'],['Řekl/a bych, že…','Я бы сказал(а), что…']];
+function viewTpl(){
+  const mk=s=>esc(s).replace(/\[\[(.+?)\]\]/g,'<mark>$1</mark>');
+  const plain=s=>s.replace(/\[\[(.+?)\]\]/g,'[$1]');
+  return `<p class="muted" style="margin:0">Жёлтым выделено то, что нужно заменить своими словами. Подходящие слова ищи в словаре или собери текст в конструкторе.</p>
+  <div class="tplgrid">${TPLS.map(x=>`<section class="card"><h2 style="font-size:18px">${x.t}</h2><div class="tpl">${mk(x.txt)}</div><button class="btn" data-copy="${esc(plain(x.txt))}">Копировать шаблон</button></section>`).join('')}</div>
+  <div class="tplgrid">${SAMPLES.map(x=>`<section class="card"><h2 style="font-size:18px">${x.t}</h2><div class="tpl">${esc(x.cz)}</div><details><summary>Показать перевод</summary><div class="tpl muted">${esc(x.ru)}</div></details><button class="btn" data-copy="${esc(x.cz)}">Копировать текст</button></section>`).join('')}</div>
+  <section class="card"><h2 style="font-size:18px">Если не хватает слова</h2><p class="muted" style="margin:6px 0 4px">Не замолкай. Опиши предмет другими словами.</p><div class="groups" style="margin-top:6px"><div class="grp">${HELP.map(rowHTML).join('')}</div></div></section>`;
+}
+window.viewTpl=viewTpl;
+
+/* ---------- старт ---------- */
+(function(){
+  try{const h=location.hash.slice(1); if(TABS.some(t=>t[0]===h)) S.tab=h}catch(e){}
+  renderAll();
+})();
+</script>
+
+</body></html>
